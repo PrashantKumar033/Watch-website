@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: watch-website-backend
+    env: node
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        fromDatabase:
+          name: watch-store-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: EMAIL_USER
+        value: your-email@gmail.com
+      - key: EMAIL_PASS
+        value: your-email-password
+
+  - type: static
+    name: watch-website-frontend
+    buildCommand: echo "No build needed for static site"
+    staticPublishPath: ./responsive-watches-website
+    routes:
+      - type: rewrite
+        source: /api/*
+        destination: https://watch-website-backend.onrender.com/api/*
+
+databases:
+  - name: watch-store-db
+    databaseName: watchstore
+    user: watchstore_user
