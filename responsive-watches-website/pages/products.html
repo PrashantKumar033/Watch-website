@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <title>All Products - Rolex</title>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <main class="main">
+        <section class="section container" style="padding-top: 8rem;">
+            <h1 class="section__title">All Products</h1>
+            
+            <div class="products__hero" style="text-align: center; margin-bottom: 3rem;">
+                <p style="font-size: 1.2rem; color: var(--text-color); max-width: 600px; margin: 0 auto;">
+                    Explore our complete collection of luxury timepieces, from classic designs to modern innovations. 
+                    Find the perfect watch that matches your style and personality.
+                </p>
+            </div>
+
+            <div class="products__filters" style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap;">
+                <button class="filter__btn active" data-filter="all" style="padding: 0.5rem 1.5rem; border: 2px solid var(--first-color); background: var(--first-color); color: white; border-radius: 2rem; cursor: pointer;">All</button>
+                <button class="filter__btn" data-filter="luxury" style="padding: 0.5rem 1.5rem; border: 2px solid var(--first-color); background: transparent; color: var(--first-color); border-radius: 2rem; cursor: pointer;">Luxury</button>
+                <button class="filter__btn" data-filter="sport" style="padding: 0.5rem 1.5rem; border: 2px solid var(--first-color); background: transparent; color: var(--first-color); border-radius: 2rem; cursor: pointer;">Sport</button>
+                <button class="filter__btn" data-filter="classic" style="padding: 0.5rem 1.5rem; border: 2px solid var(--first-color); background: transparent; color: var(--first-color); border-radius: 2rem; cursor: pointer;">Classic</button>
+            </div>
+
+            <div class="products__container grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                <article class="products__card luxury" style="background: var(--container-color); padding: 1.5rem; border-radius: 1rem; text-align: center; transition: transform 0.3s;">
+                    <div style="margin-bottom: 1rem;">
+                        <img src="../assets/img/product1.png" alt="Spirit Rose" style="width: 150px; height: 150px; object-fit: contain;">
+                    </div>
+                    <h3 style="margin-bottom: 0.5rem; color: var(--title-color);">Spirit Rose</h3>
+                    <p style="color: var(--text-color); font-size: 0.9rem; margin-bottom: 1rem;">Elegant rose gold finish with premium leather strap</p>
+                    <span style="color: var(--first-color); font-weight: bold; font-size: 1.1rem; margin-bottom: 1rem; display: block;">$1500</span>
+                    <button class="products__button" style="background: var(--first-color); color: white; border: none; padding: 0.75rem; border-radius: 50%; cursor: pointer; font-size: 1.25rem;">
+                        <i class='bx bx-shopping-bag'></i>
+                    </button>
+                </article>
+
+                <article class="products__card sport" style="background: var(--container-color); padding: 1.5rem; border-radius: 1rem; text-align: center; transition: transform 0.3s;">
+                    <div style="margin-bottom: 1rem;">
+                        <img src="../assets/img/product2.png" alt="Khaki Pilot" style="width: 150px; height: 150px; object-fit: contain;">
+                    </div>
+                    <h3 style="margin-bottom: 0.5rem; color: var(--title-color);">Khaki Pilot</h3>
+                    <p style="color: var(--text-color); font-size: 0.9rem; margin-bottom: 1rem;">Military-inspired design with robust construction</p>
+                    <span style="color: var(--first-color); font-weight: bold; font-size: 1.1rem; margin-bottom: 1rem; display: block;">$1350</span>
+                    <button class="products__button" style="background: var(--first-color); color: white; border: none; padding: 0.75rem; border-radius: 50%; cursor: pointer; font-size: 1.25rem;">
+                        <i class='bx bx-shopping-bag'></i>
+                    </button>
+                </article>
+
+                <article class="products__card classic" style="background: var(--container-color); padding: 1.5rem; border-radius: 1rem; text-align: center; transition: transform 0.3s;">
+                    <div style="margin-bottom: 1rem;">
+                        <img src="../assets/img/product3.png" alt="Jubilee Black" style="width: 150px; height: 150px; object-fit: contain;">
+                    </div>
+                    <h3 style="margin-bottom: 0.5rem; color: var(--title-color);">Jubilee Black</h3>
+                    <p style="color: var(--text-color); font-size: 0.9rem; margin-bottom: 1rem;">Sophisticated black dial with steel bracelet</p>
+                    <span style="color: var(--first-color); font-weight: bold; font-size: 1.1rem; margin-bottom: 1rem; display: block;">$870</span>
+                    <button class="products__button" style="background: var(--first-color); color: white; border: none; padding: 0.75rem; border-radius: 50%; cursor: pointer; font-size: 1.25rem;">
+                        <i class='bx bx-shopping-bag'></i>
+                    </button>
+                </article>
+
+                <article class="products__card sport" style="background: var(--container-color); padding: 1.5rem; border-radius: 1rem; text-align: center; transition: transform 0.3s;">
+                    <div style="margin-bottom: 1rem;">
+                        <img src="../assets/img/product4.png" alt="Fossil ME3" style="width: 150px; height: 150px; object-fit: contain;">
+                    </div>
+                    <h3 style="margin-bottom: 0.5rem; color: var(--title-color);">Fossil ME3</h3>
+                    <p style="color: var(--text-color); font-size: 0.9rem; margin-bottom: 1rem;">Modern automatic movement with skeleton dial</p>
+                    <span style="color: var(--first-color); font-weight: bold; font-size: 1.1rem; margin-bottom: 1rem; display: block;">$650</span>
+                    <button class="products__button" style="background: var(--first-color); color: white; border: none; padding: 0.75rem; border-radius: 50%; cursor: pointer; font-size: 1.25rem;">
+                        <i class='bx bx-shopping-bag'></i>
+                    </button>
+                </article>
+
+                <article class="products__card luxury" style="background: var(--container-color); padding: 1.5rem; border-radius: 1rem; text-align: center; transition: transform 0.3s;">
+                    <div style="margin-bottom: 1rem;">
+                        <img src="../assets/img/product5.png" alt="Duchen" style="width: 150px; height: 150px; object-fit: contain;">
+                    </div>
+                    <h3 style="margin-bottom: 0.5rem; color: var(--title-color);">Duchen</h3>
+                    <p style="color: var(--text-color); font-size: 0.9rem; margin-bottom: 1rem;">Premium Swiss movement with diamond markers</p>
+                    <span style="color: var(--first-color); font-weight: bold; font-size: 1.1rem; margin-bottom: 1rem; display: block;">$950</span>
+                    <button class="products__button" style="background: var(--first-color); color: white; border: none; padding: 0.75rem; border-radius: 50%; cursor: pointer; font-size: 1.25rem;">
+                        <i class='bx bx-shopping-bag'></i>
+                    </button>
+                </article>
+
+                <article class="products__card classic" style="background: var(--container-color); padding: 1.5rem; border-radius: 1rem; text-align: center; transition: transform 0.3s;">
+                    <div style="margin-bottom: 1rem;">
+                        <img src="../assets/img/featured1.png" alt="Heritage Gold" style="width: 150px; height: 150px; object-fit: contain;">
+                    </div>
+                    <h3 style="margin-bottom: 0.5rem; color: var(--title-color);">Heritage Gold</h3>
+                    <p style="color: var(--text-color); font-size: 0.9rem; margin-bottom: 1rem;">Vintage-inspired design with gold-tone case</p>
+                    <span style="color: var(--first-color); font-weight: bold; font-size: 1.1rem; margin-bottom: 1rem; display: block;">$1200</span>
+                    <button class="products__button" style="background: var(--first-color); color: white; border: none; padding: 0.75rem; border-radius: 50%; cursor: pointer; font-size: 1.25rem;">
+                        <i class='bx bx-shopping-bag'></i>
+                    </button>
+                </article>
+            </div>
+
+            <div class="products__info" style="margin-top: 4rem; text-align: center;">
+                <h2 style="margin-bottom: 2rem; color: var(--title-color);">Find Your Perfect Timepiece</h2>
+                <p style="color: var(--text-color); max-width: 600px; margin: 0 auto 2rem;">
+                    Each watch in our collection represents the pinnacle of horological excellence. 
+                    From luxury dress watches to rugged sports models, we have something for every occasion.
+                </p>
+                <button class="button" onclick="showMoreProducts()">Load More Products</button>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <div id="cart-placeholder"></div>
+
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/components.js"></script>
+    <script>
+        // Product filtering
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterBtns = document.querySelectorAll('.filter__btn');
+            const productCards = document.querySelectorAll('.products__card');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterBtns.forEach(b => {
+                        b.classList.remove('active');
+                        b.style.background = 'transparent';
+                        b.style.color = 'var(--first-color)';
+                    });
+                    
+                    // Add active class to clicked button
+                    btn.classList.add('active');
+                    btn.style.background = 'var(--first-color)';
+                    btn.style.color = 'white';
+                    
+                    const filter = btn.dataset.filter;
+                    
+                    productCards.forEach(card => {
+                        if (filter === 'all' || card.classList.contains(filter)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Add hover effects
+            productCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-5px)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0)';
+                });
+            });
+        });
+        
+        function showMoreProducts() {
+            alert('More products coming soon!');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <title>Customer Support - Rolex</title>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+
+    <main class="main">
+        <section class="section container" style="padding-top: 8rem;">
+            <h1 class="section__title">Customer Support</h1>
+            
+            <div class="support__hero" style="text-align: center; margin-bottom: 3rem;">
+                <p style="font-size: 1.2rem; color: var(--text-color); max-width: 600px; margin: 0 auto;">
+                    We're here to help! Our dedicated customer support team is available 24/7 
+                    to assist you with any questions or concerns.
+                </p>
+            </div>
+
+            <div class="support__options grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+                <div class="support__option" style="background: var(--container-color); padding: 2rem; border-radius: 1rem; text-align: center;">
+                    <i class='bx bx-time' style="font-size: 2.5rem; color: var(--first-color); margin-bottom: 1rem;"></i>
+                    <h3 style="margin-bottom: 1rem; color: var(--title-color);">24/7 Support</h3>
+                    <p style="color: var(--text-color);">Round-the-clock assistance for all your watch-related queries and concerns.</p>
+                </div>
+
+                <div class="support__option" style="background: var(--container-color); padding: 2rem; border-radius: 1rem; text-align: center;">
+                    <i class='bx bx-shield-check' style="font-size: 2.5rem; color: var(--first-color); margin-bottom: 1rem;"></i>
+                    <h3 style="margin-bottom: 1rem; color: var(--title-color);">Warranty Support</h3>
+                    <p style="color: var(--text-color);">Comprehensive warranty coverage and repair services for all our timepieces.</p>
+                </div>
+
+                <div class="support__option" style="background: var(--container-color); padding: 2rem; border-radius: 1rem; text-align: center;">
+                    <i class='bx bx-refresh' style="font-size: 2.5rem; color: var(--first-color); margin-bottom: 1rem;"></i>
+                    <h3 style="margin-bottom: 1rem; color: var(--title-color);">Easy Returns</h3>
+                    <p style="color: var(--text-color);">Hassle-free return policy within 30 days of purchase with full refund.</p>
+                </div>
+            </div>
+
+            <div class="contact__methods grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+                <div class="contact__card" style="background: var(--container-color); padding: 2rem; border-radius: 1rem;">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <i class='bx bx-phone' style="font-size: 2rem; color: var(--first-color); margin-right: 1rem;"></i>
+                        <h3 style="color: var(--title-color);">Phone Support</h3>
+                    </div>
+                    <p style="color: var(--text-color); margin-bottom: 1rem;">Speak directly with our experts</p>
+                    <p style="font-weight: bold; color: var(--first-color); font-size: 1.1rem;">+1 (555) 123-4567</p>
+                    <p style="color: var(--text-color); font-size: 0.9rem;">Mon-Sun: 24/7</p>
+                </div>
+
+                <div class="contact__card" style="background: var(--container-color); padding: 2rem; border-radius: 1rem;">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <i class='bx bx-envelope' style="font-size: 2rem; color: var(--first-color); margin-right: 1rem;"></i>
+                        <h3 style="color: var(--title-color);">Email Support</h3>
+                    </div>
+                    <p style="color: var(--text-color); margin-bottom: 1rem;">Get detailed assistance via email</p>
+                    <p style="font-weight: bold; color: var(--first-color); font-size: 1.1rem;">support@rolex.com</p>
+                    <p style="color: var(--text-color); font-size: 0.9rem;">Response within 2 hours</p>
+                </div>
+
+                <div class="contact__card" style="background: var(--container-color); padding: 2rem; border-radius: 1rem;">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <i class='bx bx-chat' style="font-size: 2rem; color: var(--first-color); margin-right: 1rem;"></i>
+                        <h3 style="color: var(--title-color);">Live Chat</h3>
+                    </div>
+                    <p style="color: var(--text-color); margin-bottom: 1rem;">Instant messaging support</p>
+                    <button class="button" onclick="startLiveChat()">Start Chat Now</button>
+                </div>
+            </div>
+
+            <div class="faq__section" style="background: var(--container-color); padding: 2rem; border-radius: 1rem;">
+                <h2 style="text-align: center; margin-bottom: 2rem; color: var(--title-color);">Frequently Asked Questions</h2>
+                
+                <div class="faq__item" style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1.5rem;">
+                    <h4 style="color: var(--title-color); margin-bottom: 0.5rem; cursor: pointer;" onclick="toggleFAQ(this)">
+                        <i class='bx bx-plus' style="margin-right: 0.5rem;"></i>
+                        How do I track my order?
+                    </h4>
+                    <p style="color: var(--text-color); display: none; margin-left: 1.5rem;">
+                        You can track your order by logging into your account and visiting the "My Orders" section. 
+                        You'll receive a tracking number via email once your order ships.
+                    </p>
+                </div>
+
+                <div class="faq__item" style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1.5rem;">
+                    <h4 style="color: var(--title-color); margin-bottom: 0.5rem; cursor: pointer;" onclick="toggleFAQ(this)">
+                        <i class='bx bx-plus' style="margin-right: 0.5rem;"></i>
+                        What is your return policy?
+                    </h4>
+                    <p style="color: var(--text-color); display: none; margin-left: 1.5rem;">
+                        We offer a 30-day return policy for all unworn watches in original condition. 
+                        Returns are free and we provide a prepaid shipping label.
+                    </p>
+                </div>
+
+                <div class="faq__item" style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1.5rem;">
+                    <h4 style="color: var(--title-color); margin-bottom: 0.5rem; cursor: pointer;" onclick="toggleFAQ(this)">
+                        <i class='bx bx-plus' style="margin-right: 0.5rem;"></i>
+                        Do you offer international shipping?
+                    </h4>
+                    <p style="color: var(--text-color); display: none; margin-left: 1.5rem;">
+                        Yes, we ship worldwide! International shipping costs and delivery times vary by location. 
+                        All international orders include tracking and insurance.
+                    </p>
+                </div>
+
+                <div class="faq__item" style="margin-bottom: 1.5rem;">
+                    <h4 style="color: var(--title-color); margin-bottom: 0.5rem; cursor: pointer;" onclick="toggleFAQ(this)">
+                        <i class='bx bx-plus' style="margin-right: 0.5rem;"></i>
+                        How do I care for my watch?
+                    </h4>
+                    <p style="color: var(--text-color); display: none; margin-left: 1.5rem;">
+                        Keep your watch away from extreme temperatures and magnetic fields. 
+                        Clean with a soft cloth and have it serviced every 3-5 years by an authorized dealer.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <div id="cart-placeholder"></div>
+
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/components.js"></script>
+    <script>
+        function startLiveChat() {
+            alert('Live chat will be available soon! Please use phone or email support for now.');
+        }
+        
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            
+            if (answer.style.display === 'none' || answer.style.display === '') {
+                answer.style.display = 'block';
+                icon.className = 'bx bx-minus';
+            } else {
+                answer.style.display = 'none';
+                icon.className = 'bx bx-plus';
+            }
+        }
+    </script>
+</body>
+</html>

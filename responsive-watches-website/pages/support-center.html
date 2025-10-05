@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <title>Support Center - Rolex</title>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <main class="main">
+        <section class="section container" style="padding-top: 8rem;">
+            <h1 class="section__title">Support Center</h1>
+            
+            <div class="support__container grid" style="gap: 2rem; margin-top: 2rem;">
+                <div class="support__content">
+                    <h2 style="margin-bottom: 1rem; color: var(--title-color);">How can we help you?</h2>
+                    <p style="margin-bottom: 2rem; color: var(--text-color);">
+                        Welcome to our Support Center. Find answers to common questions, 
+                        get help with your orders, or contact our support team.
+                    </p>
+                </div>
+
+                <div class="support__grid grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    <div class="support__card" style="background: var(--container-color); padding: 2rem; border-radius: 1rem; text-align: center;">
+                        <i class='bx bx-help-circle' style="font-size: 3rem; color: var(--first-color); margin-bottom: 1rem;"></i>
+                        <h3 style="margin-bottom: 1rem; color: var(--title-color);">FAQ</h3>
+                        <p style="margin-bottom: 1.5rem; color: var(--text-color);">Find answers to frequently asked questions about our products and services.</p>
+                        <button class="button" onclick="showFAQ()">View FAQ</button>
+                    </div>
+
+                    <div class="support__card" style="background: var(--container-color); padding: 2rem; border-radius: 1rem; text-align: center;">
+                        <i class='bx bx-package' style="font-size: 3rem; color: var(--first-color); margin-bottom: 1rem;"></i>
+                        <h3 style="margin-bottom: 1rem; color: var(--title-color);">Order Help</h3>
+                        <p style="margin-bottom: 1.5rem; color: var(--text-color);">Track your order, return items, or get help with shipping issues.</p>
+                        <button class="button" onclick="showOrderHelp()">Order Support</button>
+                    </div>
+
+                    <div class="support__card" style="background: var(--container-color); padding: 2rem; border-radius: 1rem; text-align: center;">
+                        <i class='bx bx-chat' style="font-size: 3rem; color: var(--first-color); margin-bottom: 1rem;"></i>
+                        <h3 style="margin-bottom: 1rem; color: var(--title-color);">Live Chat</h3>
+                        <p style="margin-bottom: 1.5rem; color: var(--text-color);">Chat with our support team for immediate assistance.</p>
+                        <button class="button" onclick="startChat()">Start Chat</button>
+                    </div>
+
+                    <div class="support__card" style="background: var(--container-color); padding: 2rem; border-radius: 1rem; text-align: center;">
+                        <i class='bx bx-phone' style="font-size: 3rem; color: var(--first-color); margin-bottom: 1rem;"></i>
+                        <h3 style="margin-bottom: 1rem; color: var(--title-color);">Call Us</h3>
+                        <p style="margin-bottom: 1.5rem; color: var(--text-color);">Speak directly with our customer service representatives.</p>
+                        <p style="font-weight: bold; color: var(--first-color);">+1 (555) 123-4567</p>
+                    </div>
+                </div>
+
+                <div class="contact__form" style="margin-top: 3rem; background: var(--container-color); padding: 2rem; border-radius: 1rem;">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--title-color); text-align: center;">Send us a message</h3>
+                    <form style="display: grid; gap: 1rem;">
+                        <input type="text" placeholder="Your Name" style="padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 0.5rem; background: var(--body-color); color: var(--text-color);">
+                        <input type="email" placeholder="Your Email" style="padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 0.5rem; background: var(--body-color); color: var(--text-color);">
+                        <select style="padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 0.5rem; background: var(--body-color); color: var(--text-color);">
+                            <option>Select Issue Type</option>
+                            <option>Order Issue</option>
+                            <option>Product Question</option>
+                            <option>Technical Support</option>
+                            <option>Other</option>
+                        </select>
+                        <textarea placeholder="Describe your issue..." rows="5" style="padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 0.5rem; background: var(--body-color); color: var(--text-color); resize: vertical;"></textarea>
+                        <button type="submit" class="button">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <div id="cart-placeholder"></div>
+
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/components.js"></script>
+    <script>
+        function showFAQ() {
+            alert('FAQ section coming soon!');
+        }
+        
+        function showOrderHelp() {
+            alert('Order help section coming soon!');
+        }
+        
+        function startChat() {
+            alert('Live chat feature coming soon!');
+        }
+    </script>
+</body>
+</html>
