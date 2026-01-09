@@ -226,9 +226,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👨‍💻 Author
 
-**Prashant Kumar**
-- GitHub: [@prashant-kumar](https://github.com/nishant-kumar)
-- Email: prashant@example.com
+**Nishant Kumar**
+- GitHub: [@nishant-kumar](https://github.com/nishant-kumar)
+- Email: nishant@example.com
 
 ## 🙏 Acknowledgments
 
