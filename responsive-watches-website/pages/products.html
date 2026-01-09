@@ -23,6 +23,30 @@
                 </p>
             </div>
 
+            <div class="products__search" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 0.75rem; align-items: end; margin: 2rem auto 2rem; max-width: 1000px;">
+                <div>
+                    <label for="searchQuery" style="display:block; margin-bottom: 0.25rem; color: var(--title-color); font-weight: 600;">Search</label>
+                    <input id="searchQuery" type="text" placeholder="Search by name, brand, description" style="width: 100%; padding: 0.75rem 1rem; border: 2px solid var(--first-color); border-radius: 0.5rem; background: var(--container-color); color: var(--text-color);">
+                </div>
+                <div>
+                    <label for="minPrice" style="display:block; margin-bottom: 0.25rem; color: var(--title-color); font-weight: 600;">Min Price</label>
+                    <input id="minPrice" type="number" min="0" placeholder="0" style="width: 100%; padding: 0.75rem 1rem; border: 2px solid var(--first-color); border-radius: 0.5rem; background: var(--container-color); color: var(--text-color);">
+                </div>
+                <div>
+                    <label for="maxPrice" style="display:block; margin-bottom: 0.25rem; color: var(--title-color); font-weight: 600;">Max Price</label>
+                    <input id="maxPrice" type="number" min="0" placeholder="10000" style="width: 100%; padding: 0.75rem 1rem; border: 2px solid var(--first-color); border-radius: 0.5rem; background: var(--container-color); color: var(--text-color);">
+                </div>
+                <div>
+                    <label for="brandFilter" style="display:block; margin-bottom: 0.25rem; color: var(--title-color); font-weight: 600;">Brand</label>
+                    <select id="brandFilter" style="width: 100%; padding: 0.75rem 1rem; border: 2px solid var(--first-color); border-radius: 0.5rem; background: var(--container-color); color: var(--text-color);">
+                        <option value="">All</option>
+                    </select>
+                </div>
+                <div>
+                    <button id="searchBtn" class="button" style="padding: 0.85rem 1.5rem; width: 100%;"><i class='bx bx-search'></i> Search</button>
+                </div>
+            </div>
+
             <div class="products__filters" style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap;">
                 <button class="filter__btn active" data-filter="all" style="padding: 0.5rem 1.5rem; border: 2px solid var(--first-color); background: var(--first-color); color: white; border-radius: 2rem; cursor: pointer;">All</button>
                 <button class="filter__btn" data-filter="luxury" style="padding: 0.5rem 1.5rem; border: 2px solid var(--first-color); background: transparent; color: var(--first-color); border-radius: 2rem; cursor: pointer;">Luxury</button>
@@ -30,78 +54,8 @@
                 <button class="filter__btn" data-filter="classic" style="padding: 0.5rem 1.5rem; border: 2px solid var(--first-color); background: transparent; color: var(--first-color); border-radius: 2rem; cursor: pointer;">Classic</button>
             </div>
 
-            <div class="products__container grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
-                <article class="products__card luxury" style="background: var(--container-color); padding: 1.5rem; border-radius: 1rem; text-align: center; transition: transform 0.3s;">
-                    <div style="margin-bottom: 1rem;">
-                        <img src="../assets/img/product1.png" alt="Spirit Rose" style="width: 150px; height: 150px; object-fit: contain;">
-                    </div>
-                    <h3 style="margin-bottom: 0.5rem; color: var(--title-color);">Spirit Rose</h3>
-                    <p style="color: var(--text-color); font-size: 0.9rem; margin-bottom: 1rem;">Elegant rose gold finish with premium leather strap</p>
-                    <span style="color: var(--first-color); font-weight: bold; font-size: 1.1rem; margin-bottom: 1rem; display: block;">$1500</span>
-                    <button class="products__button" style="background: var(--first-color); color: white; border: none; padding: 0.75rem; border-radius: 50%; cursor: pointer; font-size: 1.25rem;">
-                        <i class='bx bx-shopping-bag'></i>
-                    </button>
-                </article>
-
-                <article class="products__card sport" style="background: var(--container-color); padding: 1.5rem; border-radius: 1rem; text-align: center; transition: transform 0.3s;">
-                    <div style="margin-bottom: 1rem;">
-                        <img src="../assets/img/product2.png" alt="Khaki Pilot" style="width: 150px; height: 150px; object-fit: contain;">
-                    </div>
-                    <h3 style="margin-bottom: 0.5rem; color: var(--title-color);">Khaki Pilot</h3>
-                    <p style="color: var(--text-color); font-size: 0.9rem; margin-bottom: 1rem;">Military-inspired design with robust construction</p>
-                    <span style="color: var(--first-color); font-weight: bold; font-size: 1.1rem; margin-bottom: 1rem; display: block;">$1350</span>
-                    <button class="products__button" style="background: var(--first-color); color: white; border: none; padding: 0.75rem; border-radius: 50%; cursor: pointer; font-size: 1.25rem;">
-                        <i class='bx bx-shopping-bag'></i>
-                    </button>
-                </article>
-
-                <article class="products__card classic" style="background: var(--container-color); padding: 1.5rem; border-radius: 1rem; text-align: center; transition: transform 0.3s;">
-                    <div style="margin-bottom: 1rem;">
-                        <img src="../assets/img/product3.png" alt="Jubilee Black" style="width: 150px; height: 150px; object-fit: contain;">
-                    </div>
-                    <h3 style="margin-bottom: 0.5rem; color: var(--title-color);">Jubilee Black</h3>
-                    <p style="color: var(--text-color); font-size: 0.9rem; margin-bottom: 1rem;">Sophisticated black dial with steel bracelet</p>
-                    <span style="color: var(--first-color); font-weight: bold; font-size: 1.1rem; margin-bottom: 1rem; display: block;">$870</span>
-                    <button class="products__button" style="background: var(--first-color); color: white; border: none; padding: 0.75rem; border-radius: 50%; cursor: pointer; font-size: 1.25rem;">
-                        <i class='bx bx-shopping-bag'></i>
-                    </button>
-                </article>
-
-                <article class="products__card sport" style="background: var(--container-color); padding: 1.5rem; border-radius: 1rem; text-align: center; transition: transform 0.3s;">
-                    <div style="margin-bottom: 1rem;">
-                        <img src="../assets/img/product4.png" alt="Fossil ME3" style="width: 150px; height: 150px; object-fit: contain;">
-                    </div>
-                    <h3 style="margin-bottom: 0.5rem; color: var(--title-color);">Fossil ME3</h3>
-                    <p style="color: var(--text-color); font-size: 0.9rem; margin-bottom: 1rem;">Modern automatic movement with skeleton dial</p>
-                    <span style="color: var(--first-color); font-weight: bold; font-size: 1.1rem; margin-bottom: 1rem; display: block;">$650</span>
-                    <button class="products__button" style="background: var(--first-color); color: white; border: none; padding: 0.75rem; border-radius: 50%; cursor: pointer; font-size: 1.25rem;">
-                        <i class='bx bx-shopping-bag'></i>
-                    </button>
-                </article>
-
-                <article class="products__card luxury" style="background: var(--container-color); padding: 1.5rem; border-radius: 1rem; text-align: center; transition: transform 0.3s;">
-                    <div style="margin-bottom: 1rem;">
-                        <img src="../assets/img/product5.png" alt="Duchen" style="width: 150px; height: 150px; object-fit: contain;">
-                    </div>
-                    <h3 style="margin-bottom: 0.5rem; color: var(--title-color);">Duchen</h3>
-                    <p style="color: var(--text-color); font-size: 0.9rem; margin-bottom: 1rem;">Premium Swiss movement with diamond markers</p>
-                    <span style="color: var(--first-color); font-weight: bold; font-size: 1.1rem; margin-bottom: 1rem; display: block;">$950</span>
-                    <button class="products__button" style="background: var(--first-color); color: white; border: none; padding: 0.75rem; border-radius: 50%; cursor: pointer; font-size: 1.25rem;">
-                        <i class='bx bx-shopping-bag'></i>
-                    </button>
-                </article>
-
-                <article class="products__card classic" style="background: var(--container-color); padding: 1.5rem; border-radius: 1rem; text-align: center; transition: transform 0.3s;">
-                    <div style="margin-bottom: 1rem;">
-                        <img src="../assets/img/featured1.png" alt="Heritage Gold" style="width: 150px; height: 150px; object-fit: contain;">
-                    </div>
-                    <h3 style="margin-bottom: 0.5rem; color: var(--title-color);">Heritage Gold</h3>
-                    <p style="color: var(--text-color); font-size: 0.9rem; margin-bottom: 1rem;">Vintage-inspired design with gold-tone case</p>
-                    <span style="color: var(--first-color); font-weight: bold; font-size: 1.1rem; margin-bottom: 1rem; display: block;">$1200</span>
-                    <button class="products__button" style="background: var(--first-color); color: white; border: none; padding: 0.75rem; border-radius: 50%; cursor: pointer; font-size: 1.25rem;">
-                        <i class='bx bx-shopping-bag'></i>
-                    </button>
-                </article>
+            <div class="products__container grid" id="products-container" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                <!-- Products will be loaded from database -->
             </div>
 
             <div class="products__info" style="margin-top: 4rem; text-align: center;">
@@ -121,46 +75,91 @@
     <script src="../assets/js/api.js"></script>
     <script src="../assets/js/components.js"></script>
     <script>
-        // Product filtering
-        document.addEventListener('DOMContentLoaded', () => {
-            const filterBtns = document.querySelectorAll('.filter__btn');
-            const productCards = document.querySelectorAll('.products__card');
-            
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    // Remove active class from all buttons
-                    filterBtns.forEach(b => {
-                        b.classList.remove('active');
-                        b.style.background = 'transparent';
-                        b.style.color = 'var(--first-color)';
-                    });
-                    
-                    // Add active class to clicked button
-                    btn.classList.add('active');
-                    btn.style.background = 'var(--first-color)';
-                    btn.style.color = 'white';
-                    
-                    const filter = btn.dataset.filter;
-                    
-                    productCards.forEach(card => {
-                        if (filter === 'all' || card.classList.contains(filter)) {
-                            card.style.display = 'block';
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
+        // Load, render and search/filter products
+        let allProducts = [];
+        const getBrand = (p) => {
+            const name = (p.name || '').trim();
+            return name ? name.split(' ')[0] : '';
+        };
+        const renderProducts = (list) => {
+            const container = document.getElementById('products-container');
+            if (!container) return;
+            if (!list || list.length === 0) {
+                container.innerHTML = `<div style="text-align:center; color: var(--text-color); padding: 2rem;">No products found.</div>`;
+                return;
+            }
+            container.innerHTML = list.map(product => `
+                <article class="products__card" style="background: var(--container-color); padding: 1.5rem; border-radius: 1rem; text-align: center; transition: transform 0.3s;">
+                    <div style="margin-bottom: 1rem;">
+                        <img src="../${product.image}" alt="${product.name}" style="width: 150px; height: 150px; object-fit: contain;" onerror="this.src='../assets/img/product1.png'">
+                    </div>
+                    <h3 style="margin-bottom: 0.5rem; color: var(--title-color);">${product.name}</h3>
+                    <p style="color: var(--text-color); font-size: 0.9rem; margin-bottom: 1rem;">${product.description || ''}</p>
+                    <span style="color: var(--first-color); font-weight: bold; font-size: 1.1rem; margin-bottom: 1rem; display: block;">${product.price}</span>
+                    <button class="products__button" data-product-id="${product._id}" style="background: var(--first-color); color: white; border: none; padding: 0.75rem; border-radius: 50%; cursor: pointer; font-size: 1.25rem;">
+                        <i class='bx bx-shopping-bag'></i>
+                    </button>
+                </article>
+            `).join('');
+            // Buttons
+            document.querySelectorAll('.products__button').forEach(button => {
+                button.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    const productId = button.getAttribute('data-product-id');
+                    if (productId) {
+                        await addToCart(productId, 1);
+                    }
                 });
             });
-            
-            // Add hover effects
-            productCards.forEach(card => {
+            // Hover
+            document.querySelectorAll('.products__card').forEach(card => {
                 card.addEventListener('mouseenter', () => {
                     card.style.transform = 'translateY(-5px)';
                 });
-                
                 card.addEventListener('mouseleave', () => {
                     card.style.transform = 'translateY(0)';
                 });
+            });
+        };
+        const populateBrandFilter = (products) => {
+            const select = document.getElementById('brandFilter');
+            if (!select) return;
+            const brands = Array.from(new Set(products.map(getBrand).filter(Boolean))).sort();
+            select.innerHTML = `<option value=\"\">All</option>` + brands.map(b => `<option value=\"${b}\">${b}</option>`).join('');
+        };
+        const applyFilters = () => {
+            const q = (document.getElementById('searchQuery')?.value || '').trim().toLowerCase();
+            const minP = parseFloat(document.getElementById('minPrice')?.value || '');
+            const maxP = parseFloat(document.getElementById('maxPrice')?.value || '');
+            const brand = (document.getElementById('brandFilter')?.value || '').toLowerCase();
+            return allProducts.filter(p => {
+                const matchesQuery = !q || (p.name && p.name.toLowerCase().includes(q)) || (p.description && p.description.toLowerCase().includes(q));
+                const matchesBrand = !brand || getBrand(p).toLowerCase() === brand;
+                const price = Number(p.price) || 0;
+                const matchesMin = isNaN(minP) || price >= minP;
+                const matchesMax = isNaN(maxP) || price <= maxP;
+                return matchesQuery && matchesBrand && matchesMin && matchesMax;
+            });
+        };
+        async function loadAllProducts() {
+            try {
+                allProducts = await getProducts();
+                populateBrandFilter(allProducts);
+                renderProducts(applyFilters());
+            } catch (error) {
+                console.error('Error loading products:', error);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            loadAllProducts();
+            const onFilterChange = () => renderProducts(applyFilters());
+            const searchBtn = document.getElementById('searchBtn');
+            if (searchBtn) searchBtn.addEventListener('click', (e) => { e.preventDefault(); onFilterChange(); });
+            ['searchQuery', 'minPrice', 'maxPrice', 'brandFilter'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.addEventListener('input', onFilterChange);
+                if (el && el.tagName === 'SELECT') el.addEventListener('change', onFilterChange);
             });
         });
         

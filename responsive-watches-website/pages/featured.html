@@ -23,63 +23,8 @@
                 </p>
             </div>
 
-            <div class="featured__container grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
-                <article class="featured__card" style="background: var(--container-color); padding: 2rem; border-radius: 1rem; text-align: center; position: relative; overflow: hidden;">
-                    <span class="featured__tag" style="position: absolute; top: 1rem; left: 1rem; background: var(--first-color); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.75rem;">Sale</span>
-                    
-                    <div style="margin-bottom: 1.5rem;">
-                        <img src="../assets/img/featured1.png" alt="Jazzmaster" style="width: 200px; height: 200px; object-fit: contain;">
-                    </div>
-
-                    <div class="featured__data">
-                        <h3 style="margin-bottom: 0.5rem; color: var(--title-color); font-size: 1.25rem;">Jazzmaster</h3>
-                        <p style="color: var(--text-color); margin-bottom: 1rem; font-size: 0.9rem;">Premium automatic movement with 42mm case diameter. Water resistant up to 100m.</p>
-                        <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1.5rem;">
-                            <span style="color: var(--text-color); text-decoration: line-through;">$1200</span>
-                            <span style="color: var(--first-color); font-weight: bold; font-size: 1.25rem;">$1050</span>
-                        </div>
-                    </div>
-
-                    <button class="button featured__button" style="width: 100%;">ADD TO CART</button>
-                </article>
-
-                <article class="featured__card" style="background: var(--container-color); padding: 2rem; border-radius: 1rem; text-align: center; position: relative; overflow: hidden;">
-                    <span class="featured__tag" style="position: absolute; top: 1rem; left: 1rem; background: var(--first-color); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.75rem;">Sale</span>
-                    
-                    <div style="margin-bottom: 1.5rem;">
-                        <img src="../assets/img/featured2.png" alt="Ingersoll" style="width: 200px; height: 200px; object-fit: contain;">
-                    </div>
-
-                    <div class="featured__data">
-                        <h3 style="margin-bottom: 0.5rem; color: var(--title-color); font-size: 1.25rem;">Ingersoll</h3>
-                        <p style="color: var(--text-color); margin-bottom: 1rem; font-size: 0.9rem;">Classic design with modern functionality. Stainless steel case with leather strap.</p>
-                        <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1.5rem;">
-                            <span style="color: var(--text-color); text-decoration: line-through;">$300</span>
-                            <span style="color: var(--first-color); font-weight: bold; font-size: 1.25rem;">$250</span>
-                        </div>
-                    </div>
-
-                    <button class="button featured__button" style="width: 100%;">ADD TO CART</button>
-                </article>
-
-                <article class="featured__card" style="background: var(--container-color); padding: 2rem; border-radius: 1rem; text-align: center; position: relative; overflow: hidden;">
-                    <span class="featured__tag" style="position: absolute; top: 1rem; left: 1rem; background: var(--first-color); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.75rem;">Sale</span>
-                    
-                    <div style="margin-bottom: 1.5rem;">
-                        <img src="../assets/img/featured3.png" alt="Rose Gold" style="width: 200px; height: 200px; object-fit: contain;">
-                    </div>
-
-                    <div class="featured__data">
-                        <h3 style="margin-bottom: 0.5rem; color: var(--title-color); font-size: 1.25rem;">Rose Gold</h3>
-                        <p style="color: var(--text-color); margin-bottom: 1rem; font-size: 0.9rem;">Luxurious rose gold plating with sapphire crystal. Limited edition timepiece.</p>
-                        <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1.5rem;">
-                            <span style="color: var(--text-color); text-decoration: line-through;">$950</span>
-                            <span style="color: var(--first-color); font-weight: bold; font-size: 1.25rem;">$890</span>
-                        </div>
-                    </div>
-
-                    <button class="button featured__button" style="width: 100%;">ADD TO CART</button>
-                </article>
+            <div class="featured__container grid" id="featured-container" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                <!-- Featured products will be loaded from database -->
             </div>
 
             <div class="featured__benefits" style="margin-top: 4rem; background: var(--container-color); padding: 3rem 2rem; border-radius: 1rem;">
@@ -110,5 +55,53 @@
 
     <script src="../assets/js/api.js"></script>
     <script src="../assets/js/components.js"></script>
+    <script>
+        // Load featured products from database
+        async function loadFeaturedProducts() {
+            try {
+                const products = await getProducts();
+                const featuredProducts = products.filter(p => p.category === 'featured');
+                const container = document.getElementById('featured-container');
+                
+                container.innerHTML = featuredProducts.map(product => `
+                    <article class="featured__card" style="background: var(--container-color); padding: 2rem; border-radius: 1rem; text-align: center; position: relative; overflow: hidden;">
+                        <span class="featured__tag" style="position: absolute; top: 1rem; left: 1rem; background: var(--first-color); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.75rem;">${product.isOnSale ? 'Sale' : 'Featured'}</span>
+                        
+                        <div style="margin-bottom: 1.5rem;">
+                            <img src="../${product.image}" alt="${product.name}" style="width: 200px; height: 200px; object-fit: contain;" onerror="this.src='../assets/img/featured1.png'">
+                        </div>
+
+                        <div class="featured__data">
+                            <h3 style="margin-bottom: 0.5rem; color: var(--title-color); font-size: 1.25rem;">${product.name}</h3>
+                            <p style="color: var(--text-color); margin-bottom: 1rem; font-size: 0.9rem;">${product.description}</p>
+                            <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1.5rem;">
+                                <span style="color: var(--first-color); font-weight: bold; font-size: 1.25rem;">$${product.price}</span>
+                            </div>
+                        </div>
+
+                        <button class="button featured__button" data-product-id="${product._id}" style="width: 100%;">ADD TO CART</button>
+                    </article>
+                `).join('');
+                
+                // Add event listeners to buttons
+                document.querySelectorAll('.featured__button').forEach(button => {
+                    button.addEventListener('click', async (e) => {
+                        e.preventDefault();
+                        const productId = button.getAttribute('data-product-id');
+                        if (productId) {
+                            await addToCart(productId, 1);
+                        }
+                    });
+                });
+                
+            } catch (error) {
+                console.error('Error loading featured products:', error);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            loadFeaturedProducts();
+        });
+    </script>
 </body>
 </html>

@@ -48,11 +48,6 @@ const PORT = process.env.PORT || 5000;
 if (process.env.NODE_ENV === 'production') {
   // Serve static files from frontend
   app.use(express.static(path.join(__dirname, '../responsive-watches-website')));
-  
-  // Handle React routing, return all requests to React app
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../responsive-watches-website/index.html'));
-  });
 }
 
 app.listen(PORT, () => {

@@ -48,7 +48,7 @@ let testimonialSwiper = new Swiper(".testimonial-swiper", {
 });
 
 /*=============== NEW SWIPER ===============*/
-let newSwiper = new Swiper(".new-swiper", {
+window.newSwiper = new Swiper(".new-swiper", {
     spaceBetween: 24,
     loop: 'true',
 

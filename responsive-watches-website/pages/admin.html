@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <title>Admin Panel - Watch Store</title>
+    <style>
+        .admin-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+        .admin-header {
+            margin-top: 50px;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .admin-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .credentials-box {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 25px rgba(255,107,107,0.3);
+            text-align: center;
+        }
+        .credentials-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .credentials-box p {
+            font-size: 1.1rem;
+            margin: 0.5rem 0;
+        }
+        .add-product-form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e0e0e0;
+        }
+        .add-product-form h3 {
+            color: #333;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #555;
+            font-size: 1rem;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+            background: white;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+        }
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102,126,234,0.4);
+        }
+        .products-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .products-section h3 {
+            color: #333;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+        .admin-products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .admin-product-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .admin-product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .admin-product-card img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .admin-product-card h4 {
+            color: #333;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        .admin-product-card p {
+            color: #666;
+            margin: 0.25rem 0;
+        }
+        .delete-btn {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.3);
+        }
+        .delete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,107,107,0.4);
+        }
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .admin-container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    
+    <main class="main">
+        <div class="admin-container">
+            <div class="admin-header">
+                <h1><i class='bx bx-cog'></i> Admin Panel</h1>
+                <p>Manage your premium watch store products with ease</p>
+            </div>
+
+            <!-- Admin Credentials Display -->
+            <div class="credentials-box">
+                <h3><i class='bx bx-key'></i> Admin Login Credentials</h3>
+                <p><strong>Email:</strong> pacificodin1234@gmail.com</p>
+                <p><strong>Password:</strong> prashant...</p>
+                <p><small>Use these credentials to login as admin and access product management features.</small></p>
+            </div>
+
+            <!-- Add Product Form -->
+            <div class="add-product-form">
+                <h3><i class='bx bx-plus-circle'></i> Add New Product</h3>
+                <form id="addProductForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productName">Product Name</label>
+                            <input type="text" id="productName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="productPrice">Price ($)</label>
+                            <input type="number" id="productPrice" required min="0" step="0.01">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row" style="grid-template-columns: 1fr;">
+                        <div class="form-group">
+                            <label for="productBrand">Brand</label>
+                            <select id="productBrand" required>
+                                <option value="">Select Brand</option>
+                                <option>Rolex</option>
+                                <option>Omega</option>
+                                <option>TAG Heuer</option>
+                                <option>Patek Philippe</option>
+                                <option>Seiko</option>
+                                <option>Casio</option>
+                                <option>Tissot</option>
+                                <option>Citizen</option>
+                                <option>Breitling</option>
+                                <option>Hublot</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productCategory">Category</label>
+                            <select id="productCategory" required>
+                                <option value="">Select Category</option>
+                                <option value="featured">Featured</option>
+                                <option value="products">Products</option>
+                                <option value="new">New Arrivals</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="productImageFile">Product Image (Upload)</label>
+                            <input type="file" id="productImageFile" accept="image/*" style="margin-bottom: 0.5rem;" required>
+                            <input type="hidden" id="productImage">
+                            <small style="color: #666; font-size: 0.85rem; display: block; margin-top: 0.25rem;">
+                                📁 Upload an image to attach it to the product.
+                            </small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productDescription">Description</label>
+                        <textarea id="productDescription" rows="3" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="isOnSale"> On Sale
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="button">Add Product</button>
+                </form>
+            </div>
+
+            <!-- Products List -->
+            <div class="products-section">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h3><i class='bx bx-store'></i> All Products</h3>
+                    <button onclick="loadAdminProducts()" class="button" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                        <i class='bx bx-refresh'></i> Refresh
+                    </button>
+                </div>
+                <div class="admin-search" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 0.75rem; align-items: end; margin-bottom: 1.5rem;">
+                    <div>
+                        <label for="adminSearchQuery" style="display:block; margin-bottom: 0.25rem; color: #333; font-weight: 600;">Search</label>
+                        <input id="adminSearchQuery" type="text" placeholder="Search by name, brand, description" style="width: 100%; padding: 0.6rem 0.9rem; border: 2px solid #667eea; border-radius: 0.5rem;">
+                    </div>
+                    <div>
+                        <label for="adminMinPrice" style="display:block; margin-bottom: 0.25rem; color: #333; font-weight: 600;">Min Price</label>
+                        <input id="adminMinPrice" type="number" min="0" placeholder="0" style="width: 100%; padding: 0.6rem 0.9rem; border: 2px solid #667eea; border-radius: 0.5rem;">
+                    </div>
+                    <div>
+                        <label for="adminMaxPrice" style="display:block; margin-bottom: 0.25rem; color: #333; font-weight: 600;">Max Price</label>
+                        <input id="adminMaxPrice" type="number" min="0" placeholder="10000" style="width: 100%; padding: 0.6rem 0.9rem; border: 2px solid #667eea; border-radius: 0.5rem;">
+                    </div>
+                    <div>
+                        <label for="adminBrandFilter" style="display:block; margin-bottom: 0.25rem; color: #333; font-weight: 600;">Brand</label>
+                        <select id="adminBrandFilter" style="width: 100%; padding: 0.6rem 0.9rem; border: 2px solid #667eea; border-radius: 0.5rem;">
+                            <option value="">All</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button id="adminSearchBtn" class="button" style="padding: 0.65rem 1.5rem; width: 100%;"><i class='bx bx-search'></i> Search</button>
+                    </div>
+                </div>
+                <div class="admin-products" id="adminProducts">
+                    <!-- Products will be loaded here -->
+                </div>
+
+                <!-- Edit Product Modal -->
+                <div id="editModal" style="display:none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); z-index: 10000; align-items: center; justify-content: center;">
+                    <div style="background: white; width: 95%; max-width: 700px; border-radius: 12px; padding: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                        <div style="display:flex; justify-content: space-between; align-items:center; margin-bottom:1rem;">
+                            <h3 style="margin:0; color:#333;"><i class='bx bx-edit'></i> Edit Product</h3>
+                            <button onclick="closeEditModal()" style="background:#f44336; color:white; border:none; padding:0.5rem 0.75rem; border-radius:6px; cursor:pointer;">Close</button>
+                        </div>
+                        <div class="form-row" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="editProductBrand">Brand</label>
+                                <select id="editProductBrand">
+                                    <option value="">Select Brand</option>
+                                    <option>Rolex</option>
+                                    <option>Omega</option>
+                                    <option>TAG Heuer</option>
+                                    <option>Patek Philippe</option>
+                                    <option>Seiko</option>
+                                    <option>Casio</option>
+                                    <option>Tissot</option>
+                                    <option>Citizen</option>
+                                    <option>Breitling</option>
+                                    <option>Hublot</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="editProductName">Product Name</label>
+                                <input type="text" id="editProductName" required>
+                            </div>
+                        </div>
+                        <div class="form-row" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="editProductPrice">Price ($)</label>
+                                <input type="number" id="editProductPrice" min="0" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="editProductCategory">Category</label>
+                                <select id="editProductCategory">
+                                    <option value="featured">Featured</option>
+                                    <option value="products">Products</option>
+                                    <option value="new">New Arrivals</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row" style="grid-template-columns: 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="editProductImageFile">Product Image (Upload)</label>
+                                <input type="file" id="editProductImageFile" accept="image/*" onchange="handleEditImageChange(event)" style="margin-bottom: 0.5rem;">
+                                <input type="hidden" id="editProductImage">
+                                <small style="color:#666;">Upload to change the image. If not uploaded, existing image will be kept.</small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductDescription">Description</label>
+                            <textarea id="editProductDescription" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label><input type="checkbox" id="editIsOnSale"> On Sale</label>
+                        </div>
+                        <div style="display:flex; justify-content:flex-end; gap: 0.5rem; margin-top:0.5rem;">
+                            <button class="button" onclick="saveEditProduct()" style="padding:0.75rem 1.25rem;"><i class='bx bx-save'></i> Save</button>
+                            <button class="delete-btn" onclick="closeEditModal()" style="padding:0.75rem 1.25rem; background:#6c757d; box-shadow:none;">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/components.js"></script>
+    <script>
+        // Admin functionality
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Check if user is admin
+            if (!currentUser || currentUser.role !== 'admin') {
+                showNotification('Access denied. Admin login required.', 'error');
+                setTimeout(() => {
+                    window.location.href = '../index.html';
+                }, 2000);
+                return;
+            }
+
+            // Load all products
+            await loadAdminProducts();
+            const adminOnFilterChange = () => renderAdminProducts(applyAdminFilters());
+            const adminSearchBtn = document.getElementById('adminSearchBtn');
+            if (adminSearchBtn) adminSearchBtn.addEventListener('click', (e) => { e.preventDefault(); adminOnFilterChange(); });
+            ['adminSearchQuery', 'adminMinPrice', 'adminMaxPrice', 'adminBrandFilter'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.addEventListener('input', adminOnFilterChange);
+                if (el && el.tagName === 'SELECT') el.addEventListener('change', adminOnFilterChange);
+            });
+
+            // Handle file upload
+            document.getElementById('productImageFile').addEventListener('change', async (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    // Show loading
+                    const loadingPopup = showLoadingPopup('Uploading Image...');
+                    
+                    const formData = new FormData();
+                    formData.append('image', file);
+                    
+                    try {
+                        const response = await fetch(`${API_BASE_URL}/products/upload`, {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `Bearer ${authToken}`
+                            },
+                            body: formData
+                        });
+                        
+                        loadingPopup.remove();
+                        
+                        if (response.ok) {
+                            const data = await response.json();
+                            document.getElementById('productImage').value = data.imagePath;
+                            showSuccessPopup('Image Uploaded!', `Your image has been uploaded successfully. Path: ${data.imagePath}`);
+                        } else {
+                            const errorData = await response.json();
+                            showErrorPopup('Upload Failed', errorData.message || 'Failed to upload image. Please try again.');
+                            document.getElementById('productImage').value = '';
+                        }
+                    } catch (error) {
+                        loadingPopup.remove();
+                        console.error('Upload error:', error);
+                        showErrorPopup('Upload Error', 'Network error occurred. Please check your connection and try again.');
+                        document.getElementById('productImage').value = '';
+                    }
+                }
+            });
+
+            // Add product form handler
+            document.getElementById('addProductForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const imagePath = document.getElementById('productImage').value;
+                if (!imagePath) {
+                    showErrorPopup('Image Required', 'Please upload a product image.');
+                    return;
+                }
+                const brand = document.getElementById('productBrand').value;
+                const baseName = document.getElementById('productName').value;
+                const finalName = brand ? `${brand} ${baseName}` : baseName;
+                const productData = {
+                    name: finalName,
+                    brand: brand,
+                    price: parseFloat(document.getElementById('productPrice').value),
+                    category: document.getElementById('productCategory').value,
+                    image: imagePath,
+                    description: document.getElementById('productDescription').value,
+                    isOnSale: document.getElementById('isOnSale').checked
+                };
+
+                try {
+                    const response = await apiCall('/products', {
+                        method: 'POST',
+                        body: JSON.stringify(productData)
+                    });
+                    
+                    // Show success popup
+                    showSuccessPopup('Product Added Successfully!', `${productData.name} has been added to the ${productData.category} category.`);
+                    
+                    // Reset form and reload products
+                    document.getElementById('addProductForm').reset();
+                    document.getElementById('productImage').value = '';
+                    const fileInput = document.getElementById('productImageFile');
+                    if (fileInput) fileInput.value = '';
+                    await loadAdminProducts();
+                    
+                    // Refresh homepage products if in same window
+                    if (window.opener && !window.opener.closed) {
+                        window.opener.postMessage('refreshProducts', '*');
+                    }
+                    
+                    // Also broadcast to all windows
+                    localStorage.setItem('productUpdate', Date.now().toString());
+                    window.dispatchEvent(new Event('storage'));
+                } catch (error) {
+                    console.error('Error adding product:', error);
+                    showErrorPopup('Failed to Add Product', error.message || 'Please check all fields and try again.');
+                }
+            });
+        });
+
+        let adminAllProducts = [];
+        const adminGetBrand = (p) => (p.brand && p.brand.trim()) || ((p.name || '').trim().split(' ')[0] || '');
+        const renderAdminProducts = (list) => {
+            const container = document.getElementById('adminProducts');
+            if (!container) return;
+            if (!list || list.length === 0) {
+                container.innerHTML = `<div style="text-align:center; color: #666; padding: 2rem;">No products found.</div>`;
+                return;
+            }
+            container.innerHTML = list.map(product => `
+                <div class="admin-product-card">
+                    <img src="../${product.image}" alt="${product.name}" onerror="this.src='../assets/img/featured1.png'">
+                    <h4>${product.name}</h4>
+                    <p>${product.price}</p>
+                    <p><small>${adminGetBrand(product)} • ${product.category}</small></p>
+                    <div style="display:flex; justify-content:center; gap: 0.5rem; margin-top: 0.5rem; flex-wrap: wrap;">
+                        <button class="button" style="padding: 0.5rem 1rem;" onclick="openEditModal('${product._id}')">
+                            <i class='bx bx-edit'></i> Edit
+                        </button>
+                        <button class="delete-btn" onclick="deleteProduct('${product._id}')">
+                            <i class='bx bx-trash'></i> Delete
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        };
+        const populateAdminBrandFilter = (products) => {
+            const select = document.getElementById('adminBrandFilter');
+            if (!select) return;
+            const brands = Array.from(new Set(products.map(adminGetBrand).filter(Boolean))).sort();
+            select.innerHTML = `<option value=\"\">All</option>` + brands.map(b => `<option value=\"${b}\">${b}</option>`).join('');
+        };
+        const applyAdminFilters = () => {
+            const q = (document.getElementById('adminSearchQuery')?.value || '').trim().toLowerCase();
+            const minP = parseFloat(document.getElementById('adminMinPrice')?.value || '');
+            const maxP = parseFloat(document.getElementById('adminMaxPrice')?.value || '');
+            const brand = (document.getElementById('adminBrandFilter')?.value || '').toLowerCase();
+            return adminAllProducts.filter(p => {
+                const matchesQuery = !q || (p.name && p.name.toLowerCase().includes(q)) || (p.description && p.description.toLowerCase().includes(q));
+                const matchesBrand = !brand || adminGetBrand(p).toLowerCase() === brand;
+                const price = Number(p.price) || 0;
+                const matchesMin = isNaN(minP) || price >= minP;
+                const matchesMax = isNaN(maxP) || price <= maxP;
+                return matchesQuery && matchesBrand && matchesMin && matchesMax;
+            });
+        };
+        const loadAdminProducts = async () => {
+            try {
+                adminAllProducts = await getProducts();
+                populateAdminBrandFilter(adminAllProducts);
+                renderAdminProducts(applyAdminFilters());
+            } catch (error) {
+                console.error('Error loading products:', error);
+            }
+        };
+
+        const deleteProduct = async (productId) => {
+            if (confirm('Are you sure you want to delete this product?')) {
+                try {
+                    await apiCall(`/products/${productId}`, {
+                        method: 'DELETE'
+                    });
+                    
+                    showSuccessPopup('Product Deleted!', 'The product has been successfully removed from your store.');
+                    await loadAdminProducts();
+                } catch (error) {
+                    console.error('Error deleting product:', error);
+                    showErrorPopup('Delete Failed', 'Could not delete the product. Please try again.');
+                }
+            }
+        };
+        
+        // Edit product handlers
+        let currentEditProductId = null;
+        window.openEditModal = (id) => {
+            const p = adminAllProducts.find(x => x._id === id);
+            if (!p) return;
+            currentEditProductId = id;
+            const brand = adminGetBrand(p);
+            const baseName = (p.name || '').trim().replace(new RegExp('^' + brand + '\\s+'), '');
+            const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.value = val ?? ''; };
+            setVal('editProductBrand', brand || '');
+            setVal('editProductName', baseName);
+            setVal('editProductPrice', p.price || 0);
+            setVal('editProductCategory', p.category || 'products');
+            setVal('editProductDescription', p.description || '');
+            const onSaleEl = document.getElementById('editIsOnSale');
+            if (onSaleEl) onSaleEl.checked = !!p.isOnSale;
+            setVal('editProductImage', p.image || '');
+            const modal = document.getElementById('editModal');
+            if (modal) modal.style.display = 'flex';
+        };
+        window.closeEditModal = () => {
+            const modal = document.getElementById('editModal');
+            if (modal) modal.style.display = 'none';
+        };
+        window.handleEditImageChange = async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const loading = showLoadingPopup('Uploading Image...');
+            const formData = new FormData();
+            formData.append('image', file);
+            try {
+                const response = await fetch(`${API_BASE_URL}/products/upload`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${authToken}` },
+                    body: formData
+                });
+                loading.remove();
+                if (!response.ok) {
+                    const err = await response.json();
+                    showErrorPopup('Upload Failed', err.message || 'Failed to upload image');
+                    return;
+                }
+                const data = await response.json();
+                const imgHidden = document.getElementById('editProductImage');
+                if (imgHidden) imgHidden.value = data.imagePath;
+                showSuccessPopup('Image Uploaded!', `Path: ${data.imagePath}`);
+            } catch (err) {
+                loading.remove();
+                showErrorPopup('Upload Error', 'Network error occurred.');
+            }
+        };
+        window.saveEditProduct = async () => {
+            if (!currentEditProductId) return;
+            const brand = document.getElementById('editProductBrand')?.value || '';
+            const baseName = (document.getElementById('editProductName')?.value || '').trim();
+            const name = brand ? `${brand} ${baseName}` : baseName;
+            const price = parseFloat(document.getElementById('editProductPrice')?.value || '0');
+            const category = document.getElementById('editProductCategory')?.value || 'products';
+            const description = document.getElementById('editProductDescription')?.value || '';
+            const isOnSale = !!document.getElementById('editIsOnSale')?.checked;
+            const image = document.getElementById('editProductImage')?.value || '';
+            if (!name || isNaN(price) || !category || !image) {
+                showErrorPopup('Invalid Input', 'Please fill all required fields and upload image if needed.');
+                return;
+            }
+            try {
+                await apiCall(`/products/${currentEditProductId}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({ name, price, category, description, isOnSale, image, brand })
+                });
+                closeEditModal();
+                await loadAdminProducts();
+                localStorage.setItem('productUpdate', Date.now().toString());
+                window.dispatchEvent(new Event('storage'));
+                showSuccessPopup('Product Updated', 'Changes have been saved.');
+            } catch (err) {
+                showErrorPopup('Update Failed', err.message || 'Could not update the product.');
+            }
+        };
+
+        // Success popup function
+        const showSuccessPopup = (title, message) => {
+            const popup = document.createElement('div');
+            popup.innerHTML = `
+                <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000; display: flex; align-items: center; justify-content: center;">
+                    <div style="background: white; padding: 2rem; border-radius: 15px; max-width: 400px; width: 90%; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                        <div style="color: #4CAF50; font-size: 4rem; margin-bottom: 1rem;">✅</div>
+                        <h3 style="color: #333; margin-bottom: 1rem; font-size: 1.5rem;">${title}</h3>
+                        <p style="color: #666; margin-bottom: 2rem; line-height: 1.5;">${message}</p>
+                        <button onclick="this.closest('div').parentElement.remove()" style="background: #4CAF50; color: white; border: none; padding: 0.75rem 2rem; border-radius: 8px; font-size: 1rem; cursor: pointer; font-weight: 600;">OK</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(popup);
+            
+            // Auto remove after 3 seconds
+            setTimeout(() => {
+                if (popup.parentElement) {
+                    popup.remove();
+                }
+            }, 3000);
+        };
+        
+        // Error popup function
+        const showErrorPopup = (title, message) => {
+            const popup = document.createElement('div');
+            popup.innerHTML = `
+                <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000; display: flex; align-items: center; justify-content: center;">
+                    <div style="background: white; padding: 2rem; border-radius: 15px; max-width: 400px; width: 90%; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                        <div style="color: #f44336; font-size: 4rem; margin-bottom: 1rem;">❌</div>
+                        <h3 style="color: #333; margin-bottom: 1rem; font-size: 1.5rem;">${title}</h3>
+                        <p style="color: #666; margin-bottom: 2rem; line-height: 1.5;">${message}</p>
+                        <button onclick="this.closest('div').parentElement.remove()" style="background: #f44336; color: white; border: none; padding: 0.75rem 2rem; border-radius: 8px; font-size: 1rem; cursor: pointer; font-weight: 600;">OK</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(popup);
+        };
+        
+        // Loading popup function
+        const showLoadingPopup = (message) => {
+            const popup = document.createElement('div');
+            popup.innerHTML = `
+                <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000; display: flex; align-items: center; justify-content: center;">
+                    <div style="background: white; padding: 2rem; border-radius: 15px; max-width: 300px; width: 90%; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                        <div style="width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #667eea; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 1rem;"></div>
+                        <p style="color: #333; margin: 0; font-size: 1.1rem;">${message}</p>
+                    </div>
+                </div>
+                <style>
+                    @keyframes spin {
+                        0% { transform: rotate(0deg); }
+                        100% { transform: rotate(360deg); }
+                    }
+                </style>
+            `;
+            document.body.appendChild(popup);
+            return popup;
+        };
+    </script>
+</body>
+</html>

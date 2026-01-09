@@ -102,8 +102,8 @@ const products = [
 // Sample admin user
 const adminUser = {
   name: 'Admin',
-  email: 'admin@watchstore.com',
-  password: 'admin123',
+  email: 'pacificodin1234@gmail.com',
+  password: 'prashant1234',
   role: 'admin'
 };
 

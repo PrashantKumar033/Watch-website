@@ -1,4 +1,4 @@
-// Component loader for common header, footer, and cart
+// Component loader
 async function loadComponent(elementId, componentPath) {
     try {
         const response = await fetch(componentPath);
@@ -20,70 +20,76 @@ async function loadAllComponents() {
         loadComponent('cart-placeholder', basePath + 'cart.html')
     ]);
     
-    // Fix navigation links after loading
-    fixNavigationLinks(isInPages);
-    
-    // Initialize functionality after components are loaded
+    // Setup navigation after loading
+    setupNavigation(isInPages);
     initializeComponents();
 }
 
-// Fix navigation links based on current page location
-function fixNavigationLinks(isInPages) {
-    const navLinks = document.querySelectorAll('.nav__link');
+// Setup navigation links
+function setupNavigation(isInPages) {
+    // Header links
+    const logoLink = document.getElementById('logo-link');
+    const homeLink = document.getElementById('home-link');
+    const featuredLink = document.getElementById('featured-link');
+    const productsLink = document.getElementById('products-link');
+    const newLink = document.getElementById('new-link');
     
-    navLinks.forEach(link => {
-        const href = link.getAttribute('href');
-        
-        // Fix links for pages in /pages/ directory
-        if (isInPages) {
-            if (href === 'featured.html') {
-                link.setAttribute('href', 'featured.html');
-            } else if (href === 'products.html') {
-                link.setAttribute('href', 'products.html');
-            } else if (href === 'new-arrivals.html') {
-                link.setAttribute('href', 'new-arrivals.html');
-            } else if (href === '../index.html#home') {
-                link.setAttribute('href', '../index.html#home');
-            }
-        } else {
-            // Fix links for main index page
-            if (href === 'featured.html') {
-                link.setAttribute('href', 'pages/featured.html');
-            } else if (href === 'products.html') {
-                link.setAttribute('href', 'pages/products.html');
-            } else if (href === 'new-arrivals.html') {
-                link.setAttribute('href', 'pages/new-arrivals.html');
-            } else if (href === '../index.html#home') {
-                link.setAttribute('href', '#home');
-            }
-        }
-    });
+    // Footer links
+    const termsLink = document.getElementById('terms-link');
+    const privacyLink = document.getElementById('privacy-link');
+    const warrantyLink = document.getElementById('warranty-link');
+
+    const supportLink = document.getElementById('support-link');
+    const customerLink = document.getElementById('customer-link');
+    const aboutLink = document.getElementById('about-link');
+    const copyrightLink = document.getElementById('copyright-link');
     
-    // Fix footer links
-    const footerLinks = document.querySelectorAll('.footer__link');
-    footerLinks.forEach(link => {
-        const href = link.getAttribute('href');
+    if (isInPages) {
+        // From pages folder
+        if (logoLink) logoLink.href = '../index.html';
+        if (homeLink) homeLink.href = '../index.html';
+        if (featuredLink) featuredLink.href = 'featured.html';
+        if (productsLink) productsLink.href = 'products.html';
+        if (newLink) newLink.href = 'new-arrivals.html';
         
-        if (!isInPages && href.startsWith('../pages/')) {
-            link.setAttribute('href', href.replace('../pages/', 'pages/'));
-        } else if (!isInPages && href.startsWith('../index.html')) {
-            link.setAttribute('href', href.replace('../index.html', 'index.html'));
-        }
-    });
+        // Footer links from pages
+        if (termsLink) termsLink.href = 'terms-conditions.html';
+        if (privacyLink) privacyLink.href = 'privacy-policy.html';
+        if (warrantyLink) warrantyLink.href = 'warranty-policy.html';
+
+        if (supportLink) supportLink.href = 'support-center.html';
+        if (customerLink) customerLink.href = 'customer-support.html';
+        if (aboutLink) aboutLink.href = 'about-us.html';
+        if (copyrightLink) copyrightLink.href = 'copyright.html';
+    } else {
+        // From root
+        if (logoLink) logoLink.href = 'index.html';
+        if (homeLink) homeLink.href = '#home';
+        if (featuredLink) featuredLink.href = 'pages/featured.html';
+        if (productsLink) productsLink.href = 'pages/products.html';
+        if (newLink) newLink.href = 'pages/new-arrivals.html';
+        
+        // Footer links from root
+        if (termsLink) termsLink.href = 'pages/terms-conditions.html';
+        if (privacyLink) privacyLink.href = 'pages/privacy-policy.html';
+        if (warrantyLink) warrantyLink.href = 'pages/warranty-policy.html';
+
+        if (supportLink) supportLink.href = 'pages/support-center.html';
+        if (customerLink) customerLink.href = 'pages/customer-support.html';
+        if (aboutLink) aboutLink.href = 'pages/about-us.html';
+        if (copyrightLink) copyrightLink.href = 'pages/copyright.html';
+    }
 }
 
-// Initialize component functionality
+// Initialize components
 function initializeComponents() {
-    // Theme functionality
+    // Theme
     const themeButton = document.getElementById('theme-button');
     const darkTheme = 'dark-theme';
     const iconTheme = 'bx-sun';
     
     const selectedTheme = localStorage.getItem('selected-theme');
     const selectedIcon = localStorage.getItem('selected-icon');
-    
-    const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light';
-    const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'bx bx-moon' : 'bx bx-sun';
     
     if (selectedTheme) {
         document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme);
@@ -93,96 +99,67 @@ function initializeComponents() {
     themeButton.addEventListener('click', () => {
         document.body.classList.toggle(darkTheme);
         themeButton.classList.toggle(iconTheme);
-        localStorage.setItem('selected-theme', getCurrentTheme());
-        localStorage.setItem('selected-icon', getCurrentIcon());
-        
-        // Immediately update header button colors
-        updateHeaderButtonColors();
+        localStorage.setItem('selected-theme', document.body.classList.contains(darkTheme) ? 'dark' : 'light');
+        localStorage.setItem('selected-icon', themeButton.classList.contains(iconTheme) ? 'bx bx-moon' : 'bx bx-sun');
     });
     
-    // Function to update header button colors
-    function updateHeaderButtonColors() {
-        const isDark = document.body.classList.contains(darkTheme);
-        const headerButtons = document.querySelectorAll('.nav__user i, .nav__login i, .nav__shop i, .nav__toggle i, .change-theme');
-        
-        headerButtons.forEach(button => {
-            if (isDark) {
-                button.style.color = 'var(--title-color)';
-            } else {
-                button.style.color = 'var(--title-color)';
-            }
-        });
-    }
-    
-    // Initial call to set correct colors
-    updateHeaderButtonColors();
-    
-    // Navigation menu functionality
+    // Navigation menu
     const navMenu = document.getElementById('nav-menu');
     const navToggle = document.getElementById('nav-toggle');
     const navClose = document.getElementById('nav-close');
     
-    if(navToggle){
-        navToggle.addEventListener('click', () =>{
-            navMenu.classList.add('show-menu')
-        })
+    if(navToggle) {
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.add('show-menu');
+        });
     }
     
-    if(navClose){
-        navClose.addEventListener('click', () =>{
-            navMenu.classList.remove('show-menu')
-        })
+    if(navClose) {
+        navClose.addEventListener('click', () => {
+            navMenu.classList.remove('show-menu');
+        });
     }
     
-    const navLink = document.querySelectorAll('.nav__link');
-    const linkAction = () =>{
-        const navMenu = document.getElementById('nav-menu')
-        navMenu.classList.remove('show-menu')
-    }
-    navLink.forEach(n => n.addEventListener('click', linkAction));
+    const navLinks = document.querySelectorAll('.nav__link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('show-menu');
+        });
+    });
     
-    // Cart functionality
+    // Cart
     const cart = document.getElementById('cart');
     const cartShop = document.getElementById('cart-shop');
     const cartClose = document.getElementById('cart-close');
     
-    if(cartShop){
-        cartShop.addEventListener('click', async () =>{
+    if(cartShop) {
+        cartShop.addEventListener('click', async () => {
             if (typeof updateCartUI === 'function') {
                 await updateCartUI();
             }
             cart.classList.add('show-cart');
-        })
+        });
     }
     
-    if(cartClose){
-        cartClose.addEventListener('click', () =>{
-            cart.classList.remove('show-cart')
-        })
+    if(cartClose) {
+        cartClose.addEventListener('click', () => {
+            cart.classList.remove('show-cart');
+        });
     }
     
-    // Scroll up functionality
-    const scrollUp = () =>{
-        const scrollUp = document.getElementById('scroll-up')
-        this.scrollY >= 350 ? scrollUp.classList.add('show-scroll')
-                            : scrollUp.classList.remove('show-scroll')
-    }
-    window.addEventListener('scroll', scrollUp);
-    
-    // Header scroll effect
-    const scrollHeader = () =>{
-        const header = document.getElementById('header')
-        this.scrollY >= 50 ? header.classList.add('scroll-header') 
-                           : header.classList.remove('scroll-header')
-    }
+    // Header scroll
+    const scrollHeader = () => {
+        const header = document.getElementById('header');
+        this.scrollY >= 50 ? header.classList.add('scroll-header') : header.classList.remove('scroll-header');
+    };
     window.addEventListener('scroll', scrollHeader);
     
-    // Initialize user UI if function exists
+    // Initialize user UI
     if (typeof updateUserUI === 'function') {
-        updateUserUI();
+        setTimeout(updateUserUI, 100);
     }
     
-    // Add login functionality
+    // Login
     const loginBtn = document.getElementById('nav-login');
     if (loginBtn && typeof showAuthModal === 'function') {
         loginBtn.addEventListener('click', () => {
@@ -190,7 +167,7 @@ function initializeComponents() {
         });
     }
     
-    // User dropdown functionality
+    // User dropdown
     const userSection = document.getElementById('nav-user');
     const userDropdown = userSection?.querySelector('.user__dropdown');
     const logoutBtn = document.getElementById('logout-btn');
@@ -212,12 +189,11 @@ function initializeComponents() {
         });
     }
     
-    // Close dropdown when clicking outside
     document.addEventListener('click', () => {
         if (userDropdown) userDropdown.style.display = 'none';
     });
     
-    // Checkout functionality
+    // Checkout
     const checkoutBtn = document.getElementById('cart-checkout');
     if (checkoutBtn && typeof showCheckoutModal === 'function') {
         checkoutBtn.addEventListener('click', () => {
@@ -232,5 +208,5 @@ function initializeComponents() {
     }
 }
 
-// Load components when DOM is ready
+// Load on DOM ready
 document.addEventListener('DOMContentLoaded', loadAllComponents);

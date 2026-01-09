@@ -29,7 +29,9 @@ const apiCall = async (endpoint, options = {}) => {
     return data;
   } catch (error) {
     console.error('API Error:', error);
-    showNotification(error.message, 'error');
+    if (!error.message.includes('Token is not valid') && !error.message.includes('authorization denied')) {
+      showNotification(error.message, 'error');
+    }
     throw error;
   }
 };
@@ -81,6 +83,7 @@ const logout = () => {
 const updateUserUI = () => {
   const userSection = document.getElementById('nav-user');
   const loginSection = document.getElementById('nav-login');
+
   const userName = document.getElementById('user-name');
   
   if (currentUser && authToken) {
@@ -89,10 +92,42 @@ const updateUserUI = () => {
       userSection.style.position = 'relative';
     }
     if (loginSection) loginSection.style.display = 'none';
-    if (userName) userName.textContent = currentUser.name;
+    if (userName) {
+      userName.innerHTML = `${currentUser.name} ${currentUser.role === 'admin' ? '<span style="color: #ff6b6b; font-size: 0.8em;">(Admin)</span>' : ''}`;
+    }
+    
+
+    
+    // Add admin panel link if user is admin
+    if (currentUser.role === 'admin') {
+      addAdminPanelLink();
+    }
   } else {
     if (userSection) userSection.style.display = 'none';
     if (loginSection) loginSection.style.display = 'block';
+
+    removeAdminPanelLink();
+  }
+};
+
+// Add admin panel link to navigation
+const addAdminPanelLink = () => {
+  const navList = document.querySelector('.nav__list');
+  if (navList && !document.getElementById('admin-link')) {
+    const adminLi = document.createElement('li');
+    adminLi.className = 'nav__item';
+    const isInPages = window.location.pathname.includes('/pages/');
+    const adminUrl = isInPages ? 'admin.html' : 'pages/admin.html';
+    adminLi.innerHTML = `<a href="${adminUrl}" class="nav__link" id="admin-link">Admin Panel</a>`;
+    navList.appendChild(adminLi);
+  }
+};
+
+// Remove admin panel link
+const removeAdminPanelLink = () => {
+  const adminLink = document.getElementById('admin-link');
+  if (adminLink) {
+    adminLink.parentElement.remove();
   }
 };
 
@@ -242,47 +277,62 @@ const showAuthModal = () => {
 };
 
 const updateCartUI = async () => {
-  if (!authToken) return;
+  const cartContainer = document.querySelector('.cart__container');
+  const cartPrices = document.querySelector('.cart__prices');
+  
+  if (!authToken || !currentUser) {
+    if (cartContainer) {
+      cartContainer.innerHTML = `<div style="text-align: center; padding: 2rem; color: #666;"><i class='bx bx-shopping-bag' style="font-size: 3rem; margin-bottom: 1rem; display: block;"></i><p>Please login to view your cart</p></div>`;
+    }
+    if (cartPrices) {
+      cartPrices.innerHTML = `<span class="cart__prices-item">0 items</span><span class="cart__prices-total">$0</span>`;
+    }
+    return;
+  }
   
   try {
     const cart = await getCart();
-    const cartContainer = document.querySelector('.cart__container');
-    const cartPrices = document.querySelector('.cart__prices');
     
     if (cartContainer) {
-      cartContainer.innerHTML = cart.items.map(item => `
-        <article class="cart__card">
-          <div class="cart__box">
-            <img src="${item.product.image}" alt="" class="cart__img">
-          </div>
-          <div class="cart__details">
-            <h3 class="cart__title">${item.product.name}</h3>
-            <span class="cart__price">$${item.product.price}</span>
-            <div class="cart__amount">
-              <div class="cart__amount-content">
-                <span class="cart__amount-box" onclick="updateQuantity('${item.product._id}', ${item.quantity - 1})">
-                  <i class='bx bx-minus'></i>
-                </span>
-                <span class="cart__amount-number">${item.quantity}</span>
-                <span class="cart__amount-box" onclick="updateQuantity('${item.product._id}', ${item.quantity + 1})">
-                  <i class='bx bx-plus'></i>
-                </span>
-              </div>
-              <i class='bx bx-trash-alt cart__amount-trash' onclick="removeItem('${item.product._id}')"></i>
+      if (cart.items && cart.items.length > 0) {
+        cartContainer.innerHTML = cart.items.map(item => `
+          <article class="cart__card">
+            <div class="cart__box">
+              <img src="${item.product.image}" alt="" class="cart__img" onerror="this.src='assets/img/featured1.png'">
             </div>
-          </div>
-        </article>
-      `).join('');
+            <div class="cart__details">
+              <h3 class="cart__title">${item.product.name}</h3>
+              <span class="cart__price">$${item.product.price}</span>
+              <div class="cart__amount">
+                <div class="cart__amount-content">
+                  <span class="cart__amount-box" onclick="updateQuantity('${item.product._id}', ${item.quantity - 1})">
+                    <i class='bx bx-minus'></i>
+                  </span>
+                  <span class="cart__amount-number">${item.quantity}</span>
+                  <span class="cart__amount-box" onclick="updateQuantity('${item.product._id}', ${item.quantity + 1})">
+                    <i class='bx bx-plus'></i>
+                  </span>
+                </div>
+                <i class='bx bx-trash-alt cart__amount-trash' onclick="removeItem('${item.product._id}')"></i>
+              </div>
+            </div>
+          </article>
+        `).join('');
+      } else {
+        cartContainer.innerHTML = `<div style="text-align: center; padding: 2rem; color: #666;"><i class='bx bx-shopping-bag' style="font-size: 3rem; margin-bottom: 1rem; display: block;"></i><p>Your cart is empty</p></div>`;
+      }
     }
     
     if (cartPrices) {
-      cartPrices.innerHTML = `
-        <span class="cart__prices-item">${cart.items.length} items</span>
-        <span class="cart__prices-total">$${cart.totalAmount}</span>
-      `;
+      cartPrices.innerHTML = `<span class="cart__prices-item">${cart.items ? cart.items.length : 0} items</span><span class="cart__prices-total">$${cart.totalAmount || 0}</span>`;
     }
   } catch (error) {
-    console.error('Error updating cart UI:', error);
+    if (cartContainer) {
+      cartContainer.innerHTML = `<div style="text-align: center; padding: 2rem; color: #666;"><i class='bx bx-shopping-bag' style="font-size: 3rem; margin-bottom: 1rem; display: block;"></i><p>Please login to view your cart</p></div>`;
+    }
+    if (cartPrices) {
+      cartPrices.innerHTML = `<span class="cart__prices-item">0 items</span><span class="cart__prices-total">$0</span>`;
+    }
   }
 };
 
@@ -372,10 +422,112 @@ const showCheckoutModal = () => {
   });
 };
 
+// Load dynamic products on homepage
+const loadDynamicProducts = async () => {
+  try {
+    const products = await getProducts();
+    
+    // Update featured products
+    const featuredContainer = document.querySelector('.featured__container');
+    if (featuredContainer) {
+      const featuredProducts = products.filter(p => p.category === 'featured').slice(0, 3);
+      featuredContainer.innerHTML = featuredProducts.map(product => `
+        <article class="featured__card">
+          <span class="featured__tag">${product.isOnSale ? 'Sale' : 'Featured'}</span>
+          <img src="${product.image}" alt="${product.name}" class="featured__img" onerror="this.src='assets/img/featured1.png'">
+          <div class="featured__data">
+            <h3 class="featured__title">${product.name}</h3>
+            <span class="featured__price">$${product.price}</span>
+          </div>
+          <button class="button featured__button" data-product-id="${product._id}">ADD TO CART</button>
+        </article>
+      `).join('');
+    }
+    
+    // Update products section
+    const productsContainer = document.querySelector('.products__container');
+    if (productsContainer) {
+      const regularProducts = products.filter(p => p.category === 'products').slice(0, 5);
+      productsContainer.innerHTML = regularProducts.map(product => `
+        <article class="products__card">
+          <img src="${product.image}" alt="${product.name}" class="products__img" onerror="this.src='assets/img/product1.png'">
+          <h3 class="products__title">${product.name}</h3>
+          <span class="products__price">$${product.price}</span>
+          <button class="products__button" data-product-id="${product._id}">
+            <i class='bx bx-shopping-bag'></i>
+          </button>
+        </article>
+      `).join('');
+    }
+    
+    // Update new arrivals
+    const newContainer = document.querySelector('.new-swiper .swiper-wrapper');
+    if (newContainer) {
+      const newProducts = products.filter(p => p.category === 'new').slice(0, 4);
+      newContainer.innerHTML = newProducts.map(product => `
+        <article class="new__card swiper-slide">
+          <span class="new__tag">New</span>
+          <img src="${product.image}" alt="${product.name}" class="new__img" style="padding-top: 10px;" onerror="this.src='assets/img/new1.png'">
+          <div class="new__data" style="padding-top: 10px;">
+            <h3 class="new__title">${product.name}</h3>
+            <span class="new__price">$${product.price}</span>
+          </div>
+          <button class="button new__button" data-product-id="${product._id}">ADD TO CART</button>
+        </article>
+      `).join('');
+      
+      // Reinitialize swiper after content update
+      if (window.newSwiper) {
+        window.newSwiper.update();
+      }
+    }
+    
+    // Re-attach event listeners for new buttons
+    attachProductEventListeners();
+    
+  } catch (error) {
+    console.error('Error loading dynamic products:', error);
+  }
+};
+
+// Attach event listeners to product buttons
+const attachProductEventListeners = () => {
+  // Featured and new product buttons
+  document.querySelectorAll('.featured__button, .new__button').forEach(button => {
+    button.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const productId = button.getAttribute('data-product-id');
+      if (productId) {
+        await addToCart(productId, 1);
+      }
+    });
+  });
+  
+  // Products section buttons
+  document.querySelectorAll('.products__button').forEach(button => {
+    button.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const productId = button.getAttribute('data-product-id');
+      if (productId) {
+        await addToCart(productId, 1);
+      }
+    });
+  });
+};
+
+
+
 // Initialize on page load
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   updateCartUI();
   updateUserUI();
+  
+
+  
+  // Load dynamic products if on homepage
+  if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/') {
+    await loadDynamicProducts();
+  }
   
   // Add checkout button event listener
   const checkoutBtn = document.getElementById('cart-checkout');
@@ -422,5 +574,21 @@ document.addEventListener('DOMContentLoaded', () => {
   // Close dropdown when clicking outside
   document.addEventListener('click', () => {
     if (userDropdown) userDropdown.style.display = 'none';
+  });
+  
+  // Listen for product refresh messages from admin panel
+  window.addEventListener('message', async (event) => {
+    if (event.data === 'refreshProducts') {
+      await loadDynamicProducts();
+      showNotification('Products updated!', 'success');
+    }
+  });
+  
+  // Listen for localStorage changes (cross-tab communication)
+  window.addEventListener('storage', async (event) => {
+    if (event.key === 'productUpdate') {
+      await loadDynamicProducts();
+      showNotification('Products updated!', 'success');
+    }
   });
 });
